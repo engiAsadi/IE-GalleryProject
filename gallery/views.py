@@ -1,0 +1,14 @@
+from django.views.generic import ListView
+from .models import Post
+
+#from django.shortcuts import render
+
+# Create your views here.
+
+
+#def home(request):
+#    return render(request, 'gallery/home.html')
+
+
+class PostList(ListView):
+    model = Post
