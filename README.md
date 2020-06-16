@@ -12,9 +12,8 @@
   virtualenv .venv
   source .venv/bin/activate
   pip install -r requirements.txt
-  python manage.py createsuperuser
-  python manage.py makemigrations
   python manage.py migrate  # Create database tables
+  python manage.py createsuperuser
   ```
 
 4. Run `python manage.py runserver`
@@ -31,9 +30,8 @@ cd IE-GalleryProject
 virutalenv -p "PATH\TO\Python.exe" build # Give Full Path To python.exe
 build\Scripts\activate # Activate The Virutal Environment
 pip install -r requirements.txt
-python manage.py createsuperuser
-python manage.py makemigrations
 python manage.py migrate # Create Database Tables
+python manage.py createsuperuser
 ```
 4. Run `python manage.py runserver`
 5. Go to [http://localhost:8000](http://localhost:8000).
