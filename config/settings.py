@@ -133,3 +133,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'account.User'
+
+LOGIN_URL = 'galley:login'
+LOGIN_REDIRECT_URL = 'gallery:home'
+LOGOUT_REDIRECT_URL = 'gallery:login'

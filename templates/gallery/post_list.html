@@ -1,4 +1,14 @@
 
+<div>
+	{% if user.is_authenticated %}
+		<p>hi {{user.get_username}}</p>
+        <a href="{% url 'gallery:logout' %}">logout</a>
+	{% else %}
+		<a href="{% url 'gallery:login' %}">login</a>
+		<a href="{% url 'gallery:register' %}">register</a>
+	{% endif %}
+</div>
+
 {% for post in object_list %}
     <div>
         <p>{{post.title}}</p>

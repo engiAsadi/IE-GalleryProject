@@ -38,7 +38,8 @@ python manage.py createsuperuser
 
 
 ## TODO
-- [ ] login, logout, register of backend.
+- [x] login, logout, register of backend.
+- [ ] crud backend.
 - [ ] like dislike
 - [ ] sqlite => mysql
 - [ ] comments
