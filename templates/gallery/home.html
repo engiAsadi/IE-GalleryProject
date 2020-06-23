@@ -1,18 +1,12 @@
-
-<div>
-	{% if user.is_authenticated %}
-		<p>hi {{user.get_username}}</p>
-        <a href="{% url 'gallery:home' %}">home</a>
-        <a href="{% url 'gallery:logout' %}">logout</a>
-	{% else %}
-		<a href="{% url 'gallery:login' %}">login</a>
-		<a href="{% url 'gallery:register' %}">register</a>
-	{% endif %}
-</div>
+<p>hi {{user.get_username}}</p>
+<a href="/">main page</a>
+<a href="{% url 'gallery:create' %}">create</a>
+<a href="{% url 'gallery:logout' %}">logout</a>
 
 {% for post in object_list %}
     <div>
         <p>{{post.title}}</p>
+        <a href="{% url 'gallery:delete' post.pk %}">(delete)</a>
         <img src="{{post.photo.url}}" alt="{{post.title}}">
         <p>{{post.description}}</p>
         <p>{{post.created}}</p>
