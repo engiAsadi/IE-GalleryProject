@@ -40,7 +40,8 @@ python manage.py createsuperuser
 ## TODO
 - [x] login, logout, register of backend.
 - [x] crud backend.
-- [ ] like dislike
+- [x] like dislike backend.
+- [ ] like button at front (using ajax).
 - [ ] sqlite => mysql
 - [ ] comments
 - [ ] front ...

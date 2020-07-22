@@ -12,6 +12,17 @@
 
 {% for post in object_list %}
     <div>
+        
+        <a href="{% url 'gallery:like_or_dislike' post.pk %}">
+            {% if request.user in post.likes.all %}
+                <div style="color: red;">like</div>
+            {% else %}
+                <div style="color: black;">like</div>
+            {% endif %}
+        </a>
+        <span>{{post.likes.count}}</span>
+
+        
         <p>{{post.title}}</p>
         <img src="{{post.photo.url}}" alt="{{post.title}}">
         <p>{{post.description}}</p>

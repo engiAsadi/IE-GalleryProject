@@ -12,6 +12,8 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) #, verbose_name='کاربر')
     created = models.DateTimeField(auto_now_add=True)
 
+    likes = models.ManyToManyField(User, blank=True, related_name='likes')
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title, instance=self)
         super(Post, self).save(*args, **kwargs)
