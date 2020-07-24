@@ -1,0 +1,83 @@
+/* Remove the navbar's default margin-bottom and rounded borders */
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-inverse {
+    background-color: #0C456B;
+    border: none;
+}
+
+.navbar-brand {
+    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #CF00D6;
+}
+
+
+/* Add a gray background color and some padding to the footer */
+
+footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    /* Set width to 100% */
+    margin: auto;
+    min-height: 200px;
+}
+
+.index-posts {
+    background-color: #677A89;
+    text-align: left;
+    padding: 2%;
+    color: white;
+    border: 1%;
+    border-color: #303852;
+    border-style: solid;
+}
+
+
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.SignupInputs {
+    border: 2px solid #2699FB;
+    border-radius: 15px;
+    width: 45%;
+    height: 50px;
+    margin: 1%;
+}
+
+.SignupButton {
+    background-color: #52304D;
+    border-radius: 5px;
+    width: 30%;
+    height: 50px;
+    margin-top: 5%;
+    border: none;
+    color: white;
+}
+
+::placeholder {
+    color: #F26FBA;
+    padding-left: 3%;
+}
+
+@media screen and (max-width: 600px) {
+    .SignupInputs,
+    .SignupButton {
+        width: 90%;
+    }
+}
