@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 
@@ -15,6 +15,14 @@ from .models import Post
 
 class PostList(ListView):
     model = Post
+
+
+class PostDetail(DetailView):
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Post, slug=slug)
+
+
 
 #@login_required
 def like_or_dislike(request, pk):
