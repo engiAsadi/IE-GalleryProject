@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}Bootstrap Example{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"-->
+    
+    
+    <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/styles2.css' %}" />
+
+</head>
+
+<body style="background-color: #303852;">
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-dark">
+    <div class="container-fluid" style="margin-right: 7%; margin-left: 7%;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">The Cinarta Kid</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" style="font-size: 10px; color: white;" href="#">FEED</a>
+                </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:home' %}">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:logout' %}">SIGNOUT</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:register' %}">SIGNUP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:login' %}">SIGNIN</a>
+                        </li>
+                    {% endif %}
+                
+            </ul>
+            <ul class="navbar-nav navbar-right ">
+                <li>
+                    <a style="padding-left: 0px;" href="#Instagram"> <img src="{% static 'img/instagram.svg' %}" height="auto" width="12px" ;> </a>
+                </li>
+                <li>
+                    <a style="padding-left: 0px;" href="#Website"> <img src="{% static 'img/WEB.svg.jpg' %}" height="auto" width="24px" ;></a>
+                </li>
+                <li>
+                    <a style="padding-left: 0px;" href="#Profile"> <img src="{% static 'img/user.svg' %}" height="auto" width="12px" ;></a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    
+    {% block main %}
+  
+    {% endblock %}
+    
+    
+    
+    <footer class="navbar navbar-dark" style="padding: 0;margin-bottom: 3%; margin-top: 3%;">
+        <div class="container-fluid" style="margin-right: 7%; margin-left: 7%;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+              </button>
+                <a class="navbar-brand" href=" # ">The Cinarta Kid</a>
+            </div>
+            <div class="collapse navbar-collapse " id="myNavbar ">
+                <ul class="nav navbar-nav ">
+                    <li><a style="font-size: 10px; color: white;" href="# ">FEED</a></li>
+                    <li><a style="font-size: 10px; color: white;" href="# ">SIGNUP</a></li>
+                    <li><a style="font-size: 10px; color: white;" href="# ">SIGNIN</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li>
+                        <a style="padding-left: 0px;" href="#Instagram"> <img src="{% static 'img/instagram.svg' %}" height="auto" width="12px" ;> </a>
+                    </li>
+                    <li>
+                        <a style="padding-left: 0px;" href="#Website"> <img src="{% static 'img/WEB.svg.jpg' %}" height="auto" width="24px" ;></a>
+                    </li>
+                    <li>
+                        <a style="padding-left: 0px;" href="#Profile"> <img src="{% static 'img/user.svg' %}" height="auto" width="12px" ;></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'js/clean.js' %}"></script>
+
+  <script src="{% static 'js/bsAlerts/jquery.bsAlerts.min.js' %}"></script>
+
+<script>
+  
+
+    function show_alert_message(msg, prort) {
+      console.log(msg)
+      $("#ele").trigger("add-alerts", [
+        {
+          "message": msg,
+          "priority": prort
+        }
+      ]);
+    }
+
+
+
+
+    $(".like-dislike-btn").click(function(e){
+      e.preventDefault()
+      var id = $(this).attr("data-pk")
+      $('#like-icon-' + id).attr("class", "fa fa-spinner fa-spin")
+
+      var url = $(this).attr("href")
+      $.ajax({
+        url: url,
+        success: function(s) {
+          if(s.status==true){
+            $('#like-icon-' + id).attr("class", "fas fa-heart");
+            $('#like-count-' + id).html(s.likes);
+            if (s.user_in_likes){ $('#like-icon-' + id).css('color', 'red')}
+            else{                 $('#like-icon-' + id).css('color', 'white')}
+          }
+          else if(s.status == 'not_login'){
+            $('#like-icon-' + id).attr("class", "fas fa-heart");
+            show_alert_message("you must login first.", 'danger')}
+          else{console.log('e2')}
+        },
+        error: function(error) {
+          console.log('e1');
+          $('#like-icon-' + id).attr("class", "fas fa-heart");
+        }
+      })
+    })
+  </script> 
+</body>
+
+</html>

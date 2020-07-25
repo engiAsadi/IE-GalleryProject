@@ -1,7 +1,32 @@
-<div>
-    <form method="POST"> {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="login">
+{% extends 'base.html' %}
 
-    </form>
-</div>
+{% load static %}
+{% block title %}SIGNIN{% endblock %}
+
+
+{% block main %}
+
+    <div class="container" style="text-align: center; margin-top: 7%; margin-bottom: 7%;">
+
+        <form method="POST"> {% csrf_token %}
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <div style="color: red;">{{error}}</div><br>
+                {% endfor %}
+            {% endfor %}
+             
+
+
+            {{form.username}}<br>
+            
+            {{form.password}}<br>
+
+            <input type="submit" value="SIGN IN" class="SignupButton">
+        </form>
+
+
+    </div>
+    </div><br>
+
+
+{% endblock %}
