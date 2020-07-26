@@ -16,8 +16,8 @@
 
 
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"-->
-    
-    <link rel="stylesheet" href="{% static 'css/gradiant animation.css' %}">
+
+    <link href="{% static 'css/clean.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/styles2.css' %}" />
 
@@ -54,7 +54,7 @@
                                 <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:login' %}">SIGNIN</a>
                             </li>
                         {% endif %}
-                    
+
                 </ul>
                 <ul class="navbar-nav navbar-right ">
                     <li>
@@ -72,13 +72,13 @@
         </div>
     </nav>
 
-    
+
     {% block main %}
-  
+
     {% endblock %}
-    
-    
-    
+
+
+
     <footer class="navbar navbar-expand-lg navbar-inverse navbar-dark" style="margin-bottom: 3%;">
         <div class="container-fluid" style="margin-right: 7%; margin-left: 7%;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,7 @@
                                 <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:login' %}">SIGNIN</a>
                             </li>
                         {% endif %}
-                    
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <button onclick="topFunction()" id="myBtn" title="Go to top" class="ToTop"><img src="/arrow_upward-white-18dp.svg" alt=""></button>
@@ -149,7 +149,7 @@
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
-  
+
 
     function show_alert_message(msg, prort) {
       console.log(msg)
@@ -190,7 +190,7 @@
         }
       })
     })
-  </script> 
+  </script>
 </body>
 
 </html>

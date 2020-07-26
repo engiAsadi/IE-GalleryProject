@@ -80,10 +80,53 @@ footer {
     padding-left: 3%;
 }
 
+.ToTop {
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #52304D;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    float: right;
+}
+.container {
+    max-width: 1920px;
+    width: 85%;
+}
+.vertical-menu {
+    width: 15%;
+    position: absolute;
+    height: 100%;
+    background-color: #52304D;
+    padding-left: 2%;
+    /*z-index: -1;*/
+}
+
+.vertical-menu-responsive {
+    width: 100%;
+    position: relative;
+    background-color: #52304D;
+    padding-left: 2%;
+    /*z-index: -1;*/
+}
+
 @media screen and (max-width: 600px) {
     .SignupInputs,
     .SignupButton {
         width: 90%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .Dashboard {
+        padding-left: 10%;
+        padding-right: 10%;
+        transform: scale(0.8, 0.8);
+    }
+    .vertical-menu-responsive {
+        display: none;
     }
 }
 
