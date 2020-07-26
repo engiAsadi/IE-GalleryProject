@@ -41,14 +41,12 @@ python manage.py createsuperuser
 - [x] login, logout, register of backend.
 - [x] crud backend.
 - [x] like dislike backend.
-- [x] managing template files and 
-- [x] linear gradiant
 - [x] like button at front (using ajax).
-- [x] platograph
-- [x] replacing footer
-- [ ] adding scripts for back to top button
-
-
+- [x] pagination -> backend.
+- [ ] pagination buttons -> front.
+- [ ] sqlite => mysql
+- [ ] comments
+- [ ] front ...
 
 
 create database, user in mysql commands:
