@@ -41,7 +41,9 @@ python manage.py createsuperuser
 - [x] login, logout, register of backend.
 - [x] crud backend.
 - [x] like dislike backend.
-- [ ] like button at front (using ajax).
+- [x] like button at front (using ajax).
+- [x] pagination -> backend.
+- [ ] pagination buttons -> front.
 - [ ] sqlite => mysql
 - [ ] comments
 - [ ] front ...

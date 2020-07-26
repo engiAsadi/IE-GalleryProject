@@ -15,6 +15,8 @@ from .models import Post
 
 class PostList(ListView):
     model = Post
+    paginate_by = 9
+    ordering = ['-created']
 
 
 class PostDetail(DetailView):

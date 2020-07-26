@@ -155,5 +155,19 @@
 
 
 
+    {% if page_obj.has_previous %}
+        <a href="{% url 'gallery:posts' %}?page={{page_obj.previous_page_number}}">
+            previous page
+        </a>
+    {% endif %}
+    {% if page_obj.has_next %}
+        <a href="{% url 'gallery:posts' %}?page={{page_obj.next_page_number}}">
+            next page
+        </a>
+    {% endif %}
+
+
+
+
 
 {% endblock %}

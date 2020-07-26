@@ -23,6 +23,8 @@ class PostList(LoginRequiredMixin, ListView):
     template_name = 'gallery/home.html'
     def get_queryset(self):
         return Post.objects.filter(user=self.request.user)
+    paginate_by = 9
+    ordering = ['-created']
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
