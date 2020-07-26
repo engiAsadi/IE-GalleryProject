@@ -43,10 +43,13 @@ python manage.py createsuperuser
 - [x] like dislike backend.
 - [x] like button at front (using ajax).
 - [x] pagination -> backend.
+- [x] platograph
+- [x] linear gradiant
+- [x] back to top button function script
+- [x] zooming on hovering on posts
 - [ ] pagination buttons -> front.
-- [ ] sqlite => mysql
 - [ ] comments
-- [ ] front ...
+
 
 
 create database, user in mysql commands:

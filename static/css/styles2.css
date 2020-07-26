@@ -23,6 +23,16 @@ width: 100%;
     color: #CF00D6;
 }
 
+.zoom {
+    
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.2); /* (150% zoom)*/
+  }
+
 
 /* Add a gray background color and some padding to the footer */
 
@@ -81,6 +91,8 @@ footer {
 }
 
 .ToTop {
+    
+
     font-size: 18px;
     border: none;
     outline: none;
@@ -90,6 +102,7 @@ footer {
     padding: 15px;
     border-radius: 4px;
     float: right;
+    
 }
 .container {
     max-width: 1920px;
