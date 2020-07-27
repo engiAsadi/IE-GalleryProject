@@ -1,4 +1,8 @@
 /* Remove the navbar's default margin-bottom and rounded borders */
+html,body{
+    height: 100%;
+}
+
 
 .navbar {
     margin-bottom: 0;
@@ -105,6 +109,7 @@ footer {
     
 }
 
+
 .container {
     max-width: 1920px;
     width: 85%;
@@ -138,6 +143,7 @@ footer {
         padding-left: 10%;
         padding-right: 10%;
         transform: scale(0.8, 0.8);
+        min-height: 100%;
     }
     .vertical-menu-responsive {
         display: none;
