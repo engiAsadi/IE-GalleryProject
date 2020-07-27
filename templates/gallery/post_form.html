@@ -18,10 +18,7 @@
         <form method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="row" style="text-align: center;">
 
-            <div class="col-sm-6 postpage-picture" style="text-align: center; background-color: black; float: right; height: 100%; margin-bottom: 10%;">
-                <img src="{% static 'img/cinarta-f1-transparent.png' %}" width="200" height="200">
-                {{form.photo}}
-            </div>
+            
 
             <div class="col-sm-6">
                 
@@ -57,7 +54,10 @@
                   
             </div>
 
-            
+            <div class="col-sm-6 postpage-picture" style="text-align: center; background-color: black; float: right; height: 100%; margin-bottom: 10%;">
+                <img src="{% static 'img/cinarta-f1-transparent.png' %}" width="200" height="200">
+                {{form.photo}}
+            </div>
             
 
 
