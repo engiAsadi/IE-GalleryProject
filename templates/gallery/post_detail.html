@@ -5,34 +5,87 @@
 
 
 {% block main %}
+    <div id="ele" data-alerts="alerts" data-titles='{"error": "<em>Danger Title!</em>"}' data-fade="5000" ></div>
 
     <div class="container" style="margin-top: 2%; margin-bottom: 2%">
         <div class="row" style="text-align: center;">
+
+            
+
+
             <div class="col-sm-6" style="">
-                <div class="col-sm-10" style="color: white; text-align: left; padding: 0;">{{post.title}}</div>
-                <div class="col-sm-1" style="text-align: right; padding: 0;">
-                    <img src="{% static 'img/heart.svg' %}" style="width: 15px;">
+
+                <div class="col-sm-12" style="color: white; text-align: left; padding: 0; width: 100%; margin: 0;padding: 0; margin-bottom: 6%;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: fit-content; font-size: 150%;"><b>{{post.title}}</b></td>
+                            <td style="text-align: right;"><img src="{% static 'img/heart.svg' %}" style="width: 15px;margin-top: -10%;"></td>
+                            <td style="text-align: left; padding: 0;font-size: 15px; color: #F26FBA;width: fit-content;" id="like-count-{{post.pk}}">{{post.likes.count}}</td>
+                        </tr>
+                    </table>
+
                 </div>
-                <div class="col-sm-1" style="text-align: left; padding: 0;font-size: 15px; color: #F26FBA;">{{post.likes.count}}</div>
+
+                <div class="col-sm-12" style="color: white; text-align: left; padding: 0; width: 100%; margin: 0;padding: 0; margin-bottom: 13%;">
+                <div style="text-align: left; font-size: 70%;">
+                    {{post.description}}
+                </div>
+            </div>
+
+            <form method="POST" id="post-form"> {% csrf_token %}
+            <div class="col-sm-12" style="width: 100%; margin: 0;padding: 0; margin-bottom: 5%;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: fit-content; text-align: left;"><button type="submit" class="btn btn-dark" data-pk='{{post.pk}}' style="color: #F26FBA;">Comment</button></td>
+                        <td style="text-align: right; padding: 0;font-size: 15px; width: fit-content;">
+                            <!--a style="color: #F26FBA;">Like</a-->
+                            <a class="like-dislike-btn" data-pk='{{post.pk}}' href="{% url 'gallery:like_or_dislike' post.pk %}">
+                            {% if request.user in post.likes.all %}
+                                <i id="like-icon-{{post.pk}}" class="fas fa-heart" style="color: red;">Get Back Like</i>
+                            {% else %}
+                                <i id="like-icon-{{post.pk}}" class="fas fa-heart" style="color: white;">Like</i> <!-- far -->
+                            {% endif %}
+                            </a>
+                        </td>
+                      </tr>
+                </table>
+            </div>
+
+
+            <div class="col-sm-12" style="width: 100%; margin: 0;padding: 0; height: 100px;">
+                
+                <input type="text" class="form-control" id="comment" style="position: absolute;
+                        display: block;
+                        top:0;
+                        left:0;
+                        margin: 0;
+                        height: 100%;
+                        width: 100%;
+                        border: none;
+                        padding: 10px;
+                        box-sizing: border-box;" placeholder="Write a Response...">
+            </div>
+            </form>
 
             </div>
             <div class="col-sm-6" style="text-align: center; background-color: #303852;">
-                <img src="{{post.photo.url}}" alt="{{post.title}}">
+                <img src="{{post.photo.url}}" alt="{{post.title}}" width="200" height="200">
                 <!--img src="{% static 'img/cinarta-f1-transparent.png' %}" width="200" height="200"-->
             </div>
+            
 
 
         </div>
     </div>
 
-    <form method="POST" id="post-form">
+    <!--form method="POST" id="post-form">
         {% csrf_token %}
         <div class="form-group">
             <label>Comment</label>
             <input type="text" class="form-control" id="comment" placeholder="Comment">
         </div>
         <button type="submit" class="btn btn-primary" data-pk='{{post.pk}}'>Submit</button>
-    </form>
+    </form-->
 
     {% for comment in post.comments.all %}
         <small>{{comment.created_date}}</small><br>
@@ -43,10 +96,37 @@
 
 
 
-
 {% endblock %}
 
 {% block script %}
+
+ $(".like-dislike-btn").click(function(e){
+      e.preventDefault()
+      var id = $(this).attr("data-pk")
+      $('#like-icon-' + id).attr("class", "fa fa-spinner fa-spin")
+
+      var url = $(this).attr("href")
+      $.ajax({
+        url: url,
+        success: function(s) {
+          if(s.status==true){
+            $('#like-icon-' + id).attr("class", "fas fa-heart");
+            $('#like-count-' + id).html(s.likes);
+            if (s.user_in_likes){ $('#like-icon-' + id).css('color', 'red'); $('#like-icon-' + id).text('Get Back Like');}
+            else{                 $('#like-icon-' + id).css('color', 'white'); $('#like-icon-' + id).text('Like');}
+          }
+          else if(s.status == 'not_login'){
+            $('#like-icon-' + id).attr("class", "fas fa-heart");
+            show_alert_message("you must login first.", 'danger')}
+          else{console.log('e2')}
+        },
+        error: function(error) {
+          console.log('e1');
+          $('#like-icon-' + id).attr("class", "fas fa-heart");
+        }
+      })
+    })
+
 
 $(document).on('submit', '#post-form',function(e){
     e.preventDefault()
@@ -65,7 +145,10 @@ $(document).on('submit', '#post-form',function(e){
                         console.log('salam log');
             if(s.status==true){
                 console.log('ok');
+                
                 all_comments = s.post_comments;
+
+
 
                 $.each(all_comments, function(i, c) {
                     console.log(c.username + '  ' + c.created + '  ' + c.content);

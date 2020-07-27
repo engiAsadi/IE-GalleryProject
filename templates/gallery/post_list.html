@@ -172,3 +172,35 @@
 
 
 {% endblock %}
+
+
+{% block script%}
+ $(".like-dislike-btn").click(function(e){
+      e.preventDefault()
+      var id = $(this).attr("data-pk")
+      $('#like-icon-' + id).attr("class", "fa fa-spinner fa-spin")
+
+      var url = $(this).attr("href")
+      $.ajax({
+        url: url,
+        success: function(s) {
+          if(s.status==true){
+            $('#like-icon-' + id).attr("class", "fas fa-heart");
+            $('#like-count-' + id).html(s.likes);
+            if (s.user_in_likes){ $('#like-icon-' + id).css('color', 'red')}
+            else{                 $('#like-icon-' + id).css('color', 'white')}
+          }
+          else if(s.status == 'not_login'){
+            $('#like-icon-' + id).attr("class", "fas fa-heart");
+            show_alert_message("you must login first.", 'danger')}
+          else{console.log('e2')}
+        },
+        error: function(error) {
+          console.log('e1');
+          $('#like-icon-' + id).attr("class", "fas fa-heart");
+        }
+      })
+    })
+
+
+{% endblock %}
