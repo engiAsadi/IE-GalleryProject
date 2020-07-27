@@ -65,6 +65,11 @@ $(document).on('submit', '#post-form',function(e){
                         console.log('salam log');
             if(s.status==true){
                 console.log('ok');
+                all_comments = s.post_comments;
+
+                $.each(all_comments, function(i, c) {
+                    console.log(c.username + '  ' + c.created + '  ' + c.content);
+                    });
             //$('#like-icon-' + id).attr("class", "fas fa-heart");
             //$('#like-count-' + id).html(s.likes);
            

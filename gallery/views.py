@@ -75,9 +75,14 @@ def comment(request, pk):
     post_comments = post.comments.all()
     count = post_comments.count()
     
+    all_comments = []
+    for cmmnt in post_comments:
+        all_comments.append({'created': cmmnt.created_date, 'username': cmmnt.user.username, 'content': cmmnt.content})
+    
+
     return JsonResponse({
         'status': user.is_authenticated,
         'count': count,
         'user': user.username,
-        'post_comments': post_comments
+        'post_comments': all_comments
     })
