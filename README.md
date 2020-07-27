@@ -47,10 +47,10 @@ python manage.py createsuperuser
 - [x] linear gradiant
 - [x] back to top button function script
 - [x] zooming on hovering on posts
-- [ ] comment -> backend
-- [ ] comment -> front (using jquery).
+- [x] comment -> backend
+- [x] comment -> front (using jquery).
 - [ ] pagination buttons -> front.
-- [ ] comments
+- [ ] edit and delete view
 
 
 

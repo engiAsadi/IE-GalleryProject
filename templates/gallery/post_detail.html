@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="col-sm-12" style="color: white; text-align: left; padding: 0; width: 100%; margin: 0;padding: 0; margin-bottom: 13%;">
-                <div style="text-align: left; font-size: 70%;">
+                <div style="text-align: left; font-size: 80%;">
                     {{post.description}}
                 </div>
             </div>
@@ -76,6 +76,16 @@
 
 
         </div>
+        <br><br><hr>
+        <div id="comment-section">
+            <small style="color: white;">{{post.comments.all.count}} Comment :</small>
+            {% for comment in post.comments.all %}
+                <blockquote class="blockquote" style="padding-left: 5px; font-size: 95%; background-color: #304252;">
+                    <p class="mb-0" style="font-size: 90%; color: white;">{{comment.content}}</p>
+                    <footer class="blockquote-footer" style="background-color: #303852;"><small>{{comment.created_date}}  BY :  </small><cite title="Source Title"><b>{{comment.user.username}}</b></cite></footer>
+                </blockquote>
+            {% endfor %}
+        </div>
     </div>
 
     <!--form method="POST" id="post-form">
@@ -87,11 +97,6 @@
         <button type="submit" class="btn btn-primary" data-pk='{{post.pk}}'>Submit</button>
     </form-->
 
-    {% for comment in post.comments.all %}
-        <small>{{comment.created_date}}</small><br>
-        {{comment.user.username}} :  {{comment.content}}<br>
-        <hr>
-    {% endfor %}
 
 
 
@@ -145,13 +150,43 @@ $(document).on('submit', '#post-form',function(e){
                         console.log('salam log');
             if(s.status==true){
                 console.log('ok');
+                $('#comment').val('');
                 
                 all_comments = s.post_comments;
-
+                var cList = $('#comment-section');
+                cList.empty();
+$('<small/>')
+    .attr('style', 'color: white;')
+    .text(s.count + ' Comment :')
+    .appendTo(cList);
 
 
                 $.each(all_comments, function(i, c) {
-                    console.log(c.username + '  ' + c.created + '  ' + c.content);
+                    //console.log(c.username + '  ' + c.created + '  ' + c.content);
+var blockquote = $('<blockquote/>')
+    .addClass('blockquote')
+    .attr('style', 'padding-left: 5px; font-size: 95%; background-color: #304252;')
+    .appendTo(cList);
+var p = $('<p/>')
+    .addClass('mb-0')
+    .attr('style', 'font-size: 90%; color: white;')
+    .text(c.content)
+    .appendTo(blockquote);
+var footer = $('<footer/>')
+    .addClass('blockquote-footer')
+    .attr('style', 'background-color: #303852;')
+    .appendTo(blockquote);
+var small = $('<small/>')
+    .text(c.created + '  BY :  ')
+    .appendTo(footer);
+var cite = $('<cite/>')
+    .attr('title', 'Source Title')
+    .appendTo(footer);
+var b = $('<b/>')
+    .text(c.username)
+    .appendTo(cite);
+
+
                     });
             //$('#like-icon-' + id).attr("class", "fas fa-heart");
             //$('#like-count-' + id).html(s.likes);
