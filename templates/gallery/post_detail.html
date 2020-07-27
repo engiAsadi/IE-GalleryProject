@@ -25,8 +25,62 @@
         </div>
     </div>
 
+    <form method="POST" id="post-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Comment</label>
+            <input type="text" class="form-control" id="comment" placeholder="Comment">
+        </div>
+        <button type="submit" class="btn btn-primary" data-pk='{{post.pk}}'>Submit</button>
+    </form>
+
+    {% for comment in post.comments.all %}
+        <small>{{comment.created_date}}</small><br>
+        {{comment.user.username}} :  {{comment.content}}<br>
+        <hr>
+    {% endfor %}
 
 
+
+
+
+{% endblock %}
+
+{% block script %}
+
+$(document).on('submit', '#post-form',function(e){
+    e.preventDefault()
+    var id = $(this).attr("data-pk")
+    //$('#like-icon-' + id).attr("class", "fa fa-spinner fa-spin")
+    var url = '{% url "gallery:comment" post.pk %}'
+    $.ajax({
+        type:'POST',
+        url:url,
+        data:{
+            content:$('#comment').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(s){
+                        console.log('salam log');
+            if(s.status==true){
+                console.log('ok');
+            //$('#like-icon-' + id).attr("class", "fas fa-heart");
+            //$('#like-count-' + id).html(s.likes);
+           
+          }
+          else if(s.status == 'not_login'){
+            //$('#like-icon-' + id).attr("class", "fas fa-heart");
+            show_alert_message("you must login first.", 'danger')}
+          else{console.log('e2')}
+
+            
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
+});
 
 
 {% endblock %}

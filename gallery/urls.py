@@ -12,6 +12,7 @@ urlpatterns = [
     path('register', account_view.Register.as_view(), name='register'),
 
     path('api/<int:pk>/like_or_dislike', gallery_view.like_or_dislike, name='like_or_dislike'),
+    path('api/<int:pk>/comment', gallery_view.comment, name='comment'),
 
     path('home', account_view.PostList.as_view(), name='home'),
     path('create', account_view.PostCreate.as_view(), name='create'),

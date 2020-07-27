@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 
-from .models import Post
+from .models import Post, Comment
 
 #from django.shortcuts import render
 
@@ -53,4 +53,31 @@ def like_or_dislike(request, pk):
         'status': user.is_authenticated,
         'likes': count,
         'user_in_likes': user_in_likes,
+    })
+
+
+def comment(request, pk):
+    # print(request.resolver_match)
+    user = request.user
+    post = get_object_or_404(Post, pk=pk)
+    
+    
+    if user.is_anonymous:
+        return JsonResponse({
+            'status': 'not_login',
+        })
+    content = request.POST.get('content')
+    Comment.objects.create(
+        user = user,
+        post = post,
+        content = content
+    )
+    post_comments = post.comments.all()
+    count = post_comments.count()
+    
+    return JsonResponse({
+        'status': user.is_authenticated,
+        'count': count,
+        'user': user.username,
+        'post_comments': post_comments
     })
