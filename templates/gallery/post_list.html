@@ -40,6 +40,7 @@
                             {% endif %}
                         </a>
                         <span id="like-count-{{post.pk}}">{{post.likes.count}}</span>
+                        <a href="{% url 'gallery:detail' post.slug %}"><i class="fas fa-comment-alt"></i></a><span id="like-count-{{post.pk}}">  {{post.comments.all.count}}</span>
                     </div>
 
                 </div>

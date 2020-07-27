@@ -67,6 +67,10 @@ def comment(request, pk):
             'status': 'not_login',
         })
     content = request.POST.get('content')
+    if content == '':
+        return JsonResponse({
+            'status': 'bad_content',
+        })
     Comment.objects.create(
         user = user,
         post = post,

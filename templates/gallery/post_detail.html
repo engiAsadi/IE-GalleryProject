@@ -195,6 +195,7 @@ var b = $('<b/>')
           else if(s.status == 'not_login'){
             //$('#like-icon-' + id).attr("class", "fas fa-heart");
             show_alert_message("you must login first.", 'danger')}
+          else if(s.status == 'bad_content'){show_alert_message('not valid comment', 'danger')}
           else{console.log('e2')}
 
             
