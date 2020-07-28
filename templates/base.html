@@ -16,8 +16,8 @@
 
 
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"-->
-    
-    <link rel="stylesheet" href="{% static 'css/gradiant animation.css' %}">
+
+    <link href="{% static 'css/clean.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles2.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/styles2.css' %}" />
 
@@ -32,7 +32,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">The Cinarta Kid</a>
+            <a class="navbar-brand" href="{% url 'gallery:posts' %}">The Cinarta Kid</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -54,7 +54,7 @@
                                 <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:login' %}">SIGNIN</a>
                             </li>
                         {% endif %}
-                    
+
                 </ul>
                 <ul class="navbar-nav navbar-right ">
                     <li>
@@ -72,19 +72,19 @@
         </div>
     </nav>
 
-    
+
     {% block main %}
-  
+
     {% endblock %}
-    
-    
-    
-    <footer class="navbar navbar-expand-lg navbar-inverse navbar-dark" style="margin-bottom: 3%;">
+
+
+
+    <footer class="navbar navbar-expand-lg navbar-inverse navbar-dark" style="margin-bottom: 1%;">
         <div class="container-fluid" style="margin-right: 7%; margin-left: 7%;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">The Cinarta Kid</a>
+            <a class="navbar-brand" href="{% url 'gallery:posts' %}">The Cinarta Kid</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -106,10 +106,10 @@
                                 <a class="nav-link" style="font-size: 10px; color: white;" href="{% url 'gallery:login' %}">SIGNIN</a>
                             </li>
                         {% endif %}
-                    
+
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <button onclick="topFunction()" id="myBtn" title="Go to top" class="ToTop"><img src="/arrow_upward-white-18dp.svg" alt=""></button>
+                <ul class="nav navbar-nav navbar-right" style="margin: -1%; padding: 0;">
+                    <button onclick="topFunction()" id="bttop" title="Go to top" class="ToTop"><img src="/static/img/arrow_upward-white-18dp.svg" alt=""></button>
 
                 </ul>
             </div>
@@ -128,30 +128,19 @@
 
 <script>
 
-    //Get the button
-    var mybutton = document.getElementById("myBtn");
-
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {
-        scrollFunction()
-    };
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
-        }
-    }
-
-    // When the user clicks on the button, scroll to the top of the document
+    
     function topFunction() {
+        // window.requestAnimationFrame(topFunction);
+        // window.scrollTo(0, document.documentElement.scrollTop - document.documentElement.scrollTop / 10);
+        
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
+        // window.webkitRequestAnimationFrame(topFunction);
     }
-  
+
 
     function show_alert_message(msg, prort) {
+      topFunction();
       console.log(msg)
       $("#ele").trigger("add-alerts", [
         {
@@ -161,36 +150,11 @@
       ]);
     }
 
+{% block script %}
 
 
-
-    $(".like-dislike-btn").click(function(e){
-      e.preventDefault()
-      var id = $(this).attr("data-pk")
-      $('#like-icon-' + id).attr("class", "fa fa-spinner fa-spin")
-
-      var url = $(this).attr("href")
-      $.ajax({
-        url: url,
-        success: function(s) {
-          if(s.status==true){
-            $('#like-icon-' + id).attr("class", "fas fa-heart");
-            $('#like-count-' + id).html(s.likes);
-            if (s.user_in_likes){ $('#like-icon-' + id).css('color', 'red')}
-            else{                 $('#like-icon-' + id).css('color', 'white')}
-          }
-          else if(s.status == 'not_login'){
-            $('#like-icon-' + id).attr("class", "fas fa-heart");
-            show_alert_message("you must login first.", 'danger')}
-          else{console.log('e2')}
-        },
-        error: function(error) {
-          console.log('e1');
-          $('#like-icon-' + id).attr("class", "fas fa-heart");
-        }
-      })
-    })
-  </script> 
+{% endblock %}
+  </script>
 </body>
 
 </html>
