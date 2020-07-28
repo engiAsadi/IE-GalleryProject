@@ -47,3 +47,4 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostUpdate(AccessUserMixin, UpdateView):
     model = Post
     fields = ('title', 'description', 'photo')
+    success_url = reverse_lazy('gallery:home')
