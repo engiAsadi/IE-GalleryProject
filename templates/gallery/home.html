@@ -52,8 +52,8 @@
         <a style="color: white; margin-left:10%; z-index:0;" href="{% url 'gallery:create' %}">NEW POST</a>
 
     </div>
-    
-    <div class="card-columns Dashboard">
+    <div class="Dashboard">
+    <div class="card-columns">
             
         {% for post in object_list %}
             <div class="card bg-dark text-white">
@@ -84,6 +84,18 @@
             <a href="{% url 'gallery:delete' post.pk %}" style="margin-left: 5px; color: red;"><i class="far fa-trash-alt"></i></a>
             
         {% endfor %}
+        </div>
+        <br>
+        {% if page_obj.has_previous %}
+            <a href="{% url 'gallery:home' %}?page={{page_obj.previous_page_number}}" style="margin-right: 10px;">
+                previous page <i class="fas fa-arrow-left"></i>
+            </a>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a href="{% url 'gallery:home' %}?page={{page_obj.next_page_number}}" style="margin-left: 10px;">
+                next page <i class="fas fa-arrow-right"></i>
+            </a>
+        {% endif %}
     </div>
     <!--div class="container Dashboard">
         <div class="row ">
@@ -108,17 +120,8 @@
             
 
         </div>
-    </div--><br>
-    {% if page_obj.has_previous %}
-        <a href="{% url 'gallery:posts' %}?page={{page_obj.previous_page_number}}">
-            previous page
-        </a>
-    {% endif %}
-    {% if page_obj.has_next %}
-        <a href="{% url 'gallery:posts' %}?page={{page_obj.next_page_number}}">
-            next page
-        </a>
-    {% endif %}
+    </div-->
+    
 
 
 

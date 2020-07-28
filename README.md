@@ -49,9 +49,9 @@ python manage.py createsuperuser
 - [x] zooming on hovering on posts
 - [x] comment -> backend
 - [x] comment -> front (using jquery).
-- [ ] pagination buttons -> front.
+- [x] pagination buttons -> front.
 - [x] edit and delete view
-
+- [x] adding post owner
 
 
 create database, user in mysql commands:
