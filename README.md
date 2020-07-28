@@ -50,7 +50,7 @@ python manage.py createsuperuser
 - [x] comment -> backend
 - [x] comment -> front (using jquery).
 - [ ] pagination buttons -> front.
-- [ ] edit and delete view
+- [x] edit and delete view
 
 
 

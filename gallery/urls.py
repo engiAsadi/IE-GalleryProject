@@ -18,4 +18,5 @@ urlpatterns = [
     path('create', account_view.PostCreate.as_view(), name='create'),
     path('post/<slug:slug>', gallery_view.PostDetail.as_view(), name='detail'),
     path('delete/<int:pk>', account_view.PostDelete.as_view(), name="delete"),
+    path('update/<int:pk>', account_view.PostUpdate.as_view(), name="update"),
 ]

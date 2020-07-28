@@ -1,9 +1,9 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from account.forms import RegisterForm
-from account.mixins import LoggedInRedirectMixin
+from account.mixins import LoggedInRedirectMixin, AccessUserMixin
 
 from gallery.models import Post
 
@@ -42,3 +42,8 @@ class PostCreate(LoginRequiredMixin, CreateView):
         self.obj.user = self.request.user
 
         return super(PostCreate, self).form_valid(form)
+
+
+class PostUpdate(AccessUserMixin, UpdateView):
+    model = Post
+    fields = ('title', 'description', 'photo')
