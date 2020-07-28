@@ -27,7 +27,7 @@ class PostList(LoginRequiredMixin, ListView):
     ordering = ['-created']
 
 
-class PostDelete(LoginRequiredMixin, DeleteView):
+class PostDelete(AccessUserMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('gallery:home')
 
